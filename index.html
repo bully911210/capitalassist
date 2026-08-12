@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CapitalAssist — Need Funding? Let's Make A Plan.</title>
+<meta name="description" content="One secure application. A network of registered funding partners. CapitalAssist helps qualifying South Africans explore vehicle refinance, debt consolidation, balloon payment and property-backed funding solutions — no upfront fees.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --color-primary:#0F2F45;
+    --color-accent:#1CA7A3;
+    --color-bg:#FFFFFF;
+    --color-surface:#F7F9FB;
+    --color-text:#202124;
+    --color-success:#27AE60;
+    --color-border:rgba(15,47,69,0.10);
+    --color-border-soft:rgba(15,47,69,0.06);
+    --color-primary-tint:rgba(15,47,69,0.04);
+    --color-accent-tint:rgba(28,167,163,0.10);
+    --color-danger:#C0392B;
+
+    --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --fs-h1:clamp(2.375rem,4vw + 1.4rem,4.25rem);
+    --fs-h2:clamp(1.875rem,2.4vw + 1rem,2.75rem);
+    --fs-h3:1.375rem;
+    --fs-eyebrow:0.8125rem;
+    --fs-body:1.0625rem;
+    --fs-small:0.9rem;
+    --lh-tight:1.12;
+    --lh-body:1.62;
+
+    --space-1:8px; --space-2:16px; --space-3:24px; --space-4:32px;
+    --space-5:48px; --space-6:64px; --space-7:96px; --space-8:128px;
+
+    --radius-sm:12px; --radius-md:20px; --radius-lg:28px; --radius-pill:999px;
+    --shadow-sm:0 2px 10px rgba(15,47,69,0.07);
+    --shadow-md:0 10px 28px rgba(15,47,69,0.10);
+    --shadow-lg:0 28px 70px rgba(15,47,69,0.16);
+
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --dur-fast:150ms; --dur-med:280ms; --dur-slow:460ms;
+
+    --container-max:1200px;
+    --nav-h:104px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-sans);
+    color:var(--color-text);
+    background:var(--color-bg);
+    font-size:var(--fs-body);
+    line-height:var(--lh-body);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,p,figure{margin:0;}
+  button{font-family:inherit;}
+  .container{max-width:var(--container-max);margin:0 auto;padding:0 var(--space-3);}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:none;border-radius:var(--radius-pill);
+    font-weight:600;font-size:0.95rem;letter-spacing:0.01em;
+    padding:16px 30px;cursor:pointer;white-space:nowrap;
+    transition:transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+    min-height:52px;
+    text-decoration:none;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn--primary{background:var(--color-accent);color:#fff;box-shadow:var(--shadow-sm);}
+  .btn--primary:hover{background:#178f8c;box-shadow:var(--shadow-md);}
+  .btn--dark{background:var(--color-primary);color:#fff;box-shadow:var(--shadow-sm);}
+  .btn--dark:hover{background:#0a2131;box-shadow:var(--shadow-md);}
+  .btn--ghost{background:transparent;color:var(--color-primary);border:1.5px solid var(--color-border);}
+  .btn--ghost:hover{border-color:var(--color-primary);background:var(--color-primary-tint);}
+  .btn--block{width:100%;}
+  .btn--lg{padding:19px 40px;font-size:1.05rem;}
+  .btn[disabled]{opacity:0.45;cursor:not-allowed;}
+  .btn--sm{padding:11px 20px;min-height:auto;font-size:0.9625rem;display:inline-flex;align-items:center;}
+
+  /* ---------- Sticky Nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    height:var(--nav-h);
+    display:flex;align-items:center;
+    background:rgba(255,255,255,0.78);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--color-border-soft);
+  }
+  .nav .container{display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);}
+  .nav__logo{height:61px;width:auto;object-fit:contain;display:block;}
+  .nav__actions{display:flex;align-items:center;gap:var(--space-3);}
+  @media (max-width:600px){
+    .nav__logo{height:36px;}
+    .nav .btn--sm{padding:9px 15px;font-size:0.8125rem;}
+    .nav .container{gap:10px;}
+  }
+
+  /* Mobile sticky CTA bar */
+  .mobile-cta{
+    display:none;
+    position:fixed;left:0;right:0;bottom:0;z-index:110;
+    padding:12px var(--space-3) calc(12px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,0.94);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border-top:1px solid var(--color-border-soft);
+    box-shadow:0 -8px 24px rgba(15,47,69,0.08);
+  }
+  @media (max-width:860px){ .mobile-cta{display:block;} body{padding-bottom:78px;} }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:var(--space-6) 0 var(--space-5);}
+  .hero__eyebrow{
+    display:inline-block;font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--color-accent);background:var(--color-accent-tint);padding:7px 14px;border-radius:var(--radius-pill);margin-bottom:var(--space-3);
+  }
+  .hero__grid{display:grid;grid-template-columns:1fr;gap:var(--space-6);align-items:center;}
+  @media (min-width:960px){ .hero__grid{grid-template-columns:0.92fr 1.08fr;gap:var(--space-5);} }
+  .hero h1{font-size:var(--fs-h1);line-height:var(--lh-tight);letter-spacing:-0.02em;color:var(--color-primary);font-weight:800;margin-bottom:var(--space-3);}
+  .hero__sub{font-size:1.125rem;color:#4b5a66;max-width:46ch;margin-bottom:var(--space-4);}
+  .hero__ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:var(--space-5);}
+  .trust-bar{display:flex;flex-wrap:wrap;gap:10px;}
+  .trust-chip{
+    display:inline-flex;align-items:center;gap:8px;background:var(--color-surface);
+    border:1px solid var(--color-border-soft);padding:9px 16px;border-radius:var(--radius-pill);
+    font-size:0.85rem;font-weight:600;color:var(--color-primary);
+  }
+  .trust-chip svg{color:var(--color-success);flex:0 0 auto;}
+
+  /* Video (shared component: hero facade + Concierge Score reinforcement anchor) */
+  .video-wrap{
+    position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);
+    background:var(--color-primary);aspect-ratio:16/10.2;
+  }
+  @media (min-width:960px){ .video-wrap{aspect-ratio:4/4.55;max-width:85%;margin:0 auto;} }
+  .video-wrap video, .video-wrap .video-poster{width:100%;height:100%;object-fit:cover;display:block;}
+  .video-poster{position:absolute;inset:0;border:none;padding:0;cursor:pointer;background:none;}
+  .video-poster img{width:100%;height:100%;object-fit:cover;}
+  .video-poster::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,47,69,0) 55%, rgba(15,47,69,0.55) 100%);}
+  .play-btn{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:88px;height:88px;border-radius:50%;
+    background:rgba(255,255,255,0.96);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 32px rgba(0,0,0,0.28);
+    transition:transform var(--dur-med) var(--ease);
+    z-index:2;
+  }
+  .video-poster:hover .play-btn{transform:translate(-50%,-50%) scale(1.08);}
+  .play-btn svg{margin-left:4px;}
+  .video-caption{
+    position:absolute;left:0;right:0;bottom:0;z-index:2;padding:var(--space-3);
+    color:#fff;font-weight:600;font-size:0.95rem;
+  }
+  .video-duration-badge{
+    position:absolute;top:var(--space-2);right:var(--space-2);z-index:2;
+    background:rgba(15,47,69,0.72);color:#fff;font-size:0.75rem;font-weight:700;
+    padding:6px 12px;border-radius:var(--radius-pill);letter-spacing:0.02em;
+  }
+
+  /* ---------- Generic sections ---------- */
+  .section{padding:var(--space-7) 0;}
+  .section--alt{background:var(--color-surface);}
+  .section--dark{background:var(--color-primary);color:#fff;}
+  .section__head{max-width:760px;margin:0 auto var(--space-5);text-align:center;}
+  .eyebrow{
+    display:inline-block;font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--color-accent);margin-bottom:var(--space-2);
+  }
+  .section__head h2{font-size:var(--fs-h2);color:var(--color-primary);font-weight:800;letter-spacing:-0.015em;line-height:1.18;}
+  .section--dark .section__head h2{color:#fff;}
+  .section__head p{margin-top:var(--space-2);color:#4b5a66;font-size:1.05rem;}
+  .section--dark .section__head p{color:rgba(255,255,255,0.78);}
+
+  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity 640ms var(--ease), transform 640ms var(--ease);}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- Why apply the wrong way ---------- */
+  .reasons-grid{display:grid;grid-template-columns:1fr;gap:var(--space-3);margin:var(--space-5) 0;}
+  @media (min-width:700px){ .reasons-grid{grid-template-columns:1fr 1fr;} }
+  .reason-card{
+    background:var(--color-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-md);
+    padding:var(--space-4);display:flex;gap:var(--space-2);
+  }
+  .reason-card .icon{flex:0 0 auto;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--color-primary-tint);display:flex;align-items:center;justify-content:center;color:var(--color-primary);}
+  .reason-card h3{font-size:1.05rem;color:var(--color-primary);margin-bottom:6px;font-weight:700;}
+  .reason-card p{font-size:0.95rem;color:#4b5a66;}
+  .transition-line{text-align:center;font-size:1.3rem;font-weight:700;color:var(--color-primary);margin:var(--space-5) auto;max-width:640px;}
+  .section-cta{text-align:center;margin-top:var(--space-5);}
+
+  .compare{display:grid;grid-template-columns:1fr;gap:var(--space-3);}
+  @media (min-width:700px){ .compare{grid-template-columns:1fr 1fr;align-items:stretch;} }
+  .compare-col{border-radius:var(--radius-lg);padding:var(--space-4);}
+  .compare-col--old{background:var(--color-surface);border:1px solid var(--color-border-soft);}
+  .compare-col--new{background:var(--color-primary);color:#fff;box-shadow:var(--shadow-lg);}
+  .compare-col h3{font-size:0.95rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:var(--space-3);opacity:0.7;}
+  .compare-col--new h3{color:var(--color-accent);opacity:1;}
+  .compare-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-weight:500;}
+  .compare-col--new .compare-item{border-bottom-color:rgba(255,255,255,0.12);}
+  .compare-item:last-child{border-bottom:none;}
+  .compare-item svg{flex:0 0 auto;}
+
+  /* ---------- What Do You Need (decision tree) ---------- */
+  .need-grid{display:grid;grid-template-columns:1fr;gap:var(--space-2);}
+  @media (min-width:640px){ .need-grid{grid-template-columns:1fr 1fr;} }
+  @media (min-width:960px){ .need-grid{grid-template-columns:1fr 1fr 1fr;} }
+  .need-card{
+    text-align:left;background:var(--color-bg);border:1.5px solid var(--color-border);border-radius:var(--radius-md);
+    padding:var(--space-3);cursor:pointer;transition:transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+    display:flex;flex-direction:column;gap:10px;width:100%;
+  }
+  .need-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--color-accent);}
+  .need-card .icon{width:40px;height:40px;border-radius:10px;background:var(--color-accent-tint);color:var(--color-accent);display:flex;align-items:center;justify-content:center;}
+  .need-card h3{font-size:1.05rem;font-weight:700;color:var(--color-primary);}
+  .need-card p{font-size:0.9rem;color:#5b6b7f;}
+  .need-card .arrow{margin-top:auto;font-size:0.85rem;font-weight:700;color:var(--color-accent);display:flex;align-items:center;gap:6px;}
+
+  /* ---------- How it works timeline ---------- */
+  .timeline{display:grid;grid-template-columns:1fr;gap:var(--space-4);position:relative;}
+  @media (min-width:860px){
+    .timeline{grid-template-columns:repeat(4,1fr);gap:var(--space-3);}
+    .timeline::before{content:"";position:absolute;top:26px;left:12.5%;right:12.5%;height:2px;background:var(--color-border);z-index:0;}
+  }
+  .timeline__step{position:relative;z-index:1;text-align:center;padding:0 var(--space-1);}
+  .timeline__num{
+    width:52px;height:52px;border-radius:50%;background:var(--color-primary);color:#fff;font-weight:800;font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-2);box-shadow:var(--shadow-sm);
+  }
+  .timeline__step h3{font-size:1.05rem;color:var(--color-primary);font-weight:700;margin-bottom:6px;}
+  .timeline__step p{font-size:0.9rem;color:#5b6b7f;}
+
+  /* ---------- Funding Concierge Score ---------- */
+  .quiz-card{
+    max-width:640px;margin:0 auto;background:var(--color-bg);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-lg);padding:var(--space-5);position:relative;overflow:hidden;
+  }
+  .quiz-progress-track{height:6px;border-radius:var(--radius-pill);background:var(--color-surface);overflow:hidden;margin-bottom:var(--space-2);}
+  .quiz-progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);transition:width var(--dur-med) var(--ease);width:0%;}
+  .quiz-step-label{font-size:0.8125rem;font-weight:700;color:var(--color-accent);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:var(--space-3);}
+  .quiz-question{font-size:1.4rem;font-weight:700;color:var(--color-primary);margin-bottom:var(--space-3);line-height:1.3;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:var(--space-4);}
+  .option-btn{
+    text-align:left;padding:16px 18px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);
+    background:var(--color-bg);cursor:pointer;font-size:1rem;font-weight:600;color:var(--color-text);
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    transition:border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  }
+  .option-btn:hover{border-color:var(--color-accent);}
+  .option-btn.selected{border-color:var(--color-accent);background:var(--color-accent-tint);}
+  .option-btn .check{width:22px;height:22px;border-radius:50%;border:2px solid var(--color-border);flex:0 0 auto;display:flex;align-items:center;justify-content:center;}
+  .option-btn.selected .check{border-color:var(--color-accent);background:var(--color-accent);color:#fff;}
+  .option-btn.flagged{border-color:#E0A100;background:#FFF7E0;animation:flagPulse 640ms var(--ease);}
+  .option-btn.flagged .check{border-color:#E0A100;background:#E0A100;color:#fff;}
+  @keyframes flagPulse{0%{box-shadow:0 0 0 0 rgba(224,161,0,0.35);}70%{box-shadow:0 0 0 10px rgba(224,161,0,0);}100%{box-shadow:0 0 0 0 rgba(224,161,0,0);}}
+  .quiz-number-input.flagged{border-color:#E0A100;background:#FFF7E0;}
+  .quiz-flag-note{display:flex;align-items:flex-start;gap:10px;background:#FFF7E0;border:1px solid #E0A100;border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:var(--space-2);font-size:0.85rem;font-weight:600;color:#8a6300;}
+  .quiz-flag-note svg{flex:0 0 auto;margin-top:1px;}
+  .quiz-reason-callout{display:flex;gap:12px;background:#FFF7E0;border:1px solid #E0A100;border-left:4px solid #E0A100;border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:var(--space-3);text-align:left;}
+  .quiz-reason-callout svg{flex:0 0 auto;margin-top:2px;color:#8a6300;}
+  .quiz-reason-callout p{font-size:0.92rem;color:#5a4600;margin:0;}
+  .quiz-number-input{
+    width:100%;padding:16px 18px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);
+    font-size:1.1rem;font-weight:600;font-family:inherit;margin-bottom:var(--space-2);
+  }
+  .quiz-number-input:focus{outline:none;border-color:var(--color-accent);}
+  .quiz-hint{font-size:0.85rem;color:#5b6b7f;margin-bottom:var(--space-4);}
+  .quiz-nav{display:flex;justify-content:space-between;gap:12px;}
+
+  .quiz-result{text-align:center;}
+  .stars{font-size:2.2rem;letter-spacing:4px;margin-bottom:var(--space-2);color:var(--color-border);}
+  .stars .lit{color:#F5B301;}
+  .quiz-result-title{font-size:1.6rem;font-weight:800;color:var(--color-primary);margin-bottom:var(--space-2);}
+  .quiz-result-body{color:#4b5a66;font-size:1rem;margin-bottom:var(--space-4);text-align:left;}
+  .quiz-result-body p + p{margin-top:12px;}
+  .quiz-lite-capture{display:grid;gap:12px;text-align:left;margin-top:var(--space-3);}
+
+  .quiz-visual{width:120px;height:120px;margin:0 auto var(--space-3);border-radius:50%;overflow:hidden;box-shadow:var(--shadow-md);}
+  .quiz-visual img{width:100%;height:100%;object-fit:cover;}
+
+  /* ---------- Why CapitalAssist grid ---------- */
+  .why-section{position:relative;}
+  .why-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.5;z-index:0;}
+  .why-section .container{position:relative;z-index:1;}
+  .why-grid{display:grid;grid-template-columns:1fr;gap:var(--space-3);}
+  @media (min-width:640px){ .why-grid{grid-template-columns:1fr 1fr;} }
+  @media (min-width:960px){ .why-grid{grid-template-columns:repeat(3,1fr);} }
+  .why-card{
+    background:rgba(255,255,255,0.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    border:1px solid var(--color-border-soft);border-radius:var(--radius-md);padding:var(--space-4);
+  }
+  .why-card .icon{width:44px;height:44px;border-radius:12px;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-2);}
+  .why-card h3{font-size:1.05rem;font-weight:700;color:var(--color-primary);margin-bottom:6px;}
+  .why-card p{font-size:0.9rem;color:#4b5a66;}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+  .faq-item{background:var(--color-bg);border:1px solid var(--color-border-soft);border-radius:var(--radius-md);overflow:hidden;}
+  .faq-item summary{
+    list-style:none;cursor:pointer;padding:20px var(--space-3);font-weight:700;color:var(--color-primary);
+    display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:1rem;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .plus{flex:0 0 auto;width:24px;height:24px;position:relative;}
+  .faq-item summary .plus::before,.faq-item summary .plus::after{content:"";position:absolute;background:var(--color-accent);border-radius:2px;transition:transform var(--dur-med) var(--ease);}
+  .faq-item summary .plus::before{left:0;top:50%;width:100%;height:2px;transform:translateY(-50%);}
+  .faq-item summary .plus::after{top:0;left:50%;width:2px;height:100%;transform:translateX(-50%);}
+  .faq-item[open] summary .plus::after{transform:translateX(-50%) rotate(90deg);opacity:0;}
+  .faq-item p{padding:0 var(--space-3) 20px;color:#4b5a66;font-size:0.95rem;}
+
+  /* ---------- Application ---------- */
+  .app-card{max-width:680px;margin:0 auto;background:var(--color-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:var(--space-5);}
+  .app-resume{background:var(--color-accent-tint);border:1px solid var(--color-accent);border-radius:var(--radius-md);padding:var(--space-2) var(--space-3);margin-bottom:var(--space-4);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:0.9rem;font-weight:600;color:var(--color-primary);}
+  .app-progress-label{display:flex;justify-content:space-between;font-size:0.8125rem;font-weight:700;color:var(--color-accent);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;}
+  .field{margin-bottom:var(--space-3);}
+  .field label{display:block;font-weight:600;font-size:0.9rem;color:var(--color-primary);margin-bottom:8px;}
+  .field input[type="text"],.field input[type="email"],.field input[type="tel"],.field input[type="number"],.field select{
+    width:100%;padding:14px 16px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:1rem;font-family:inherit;background:#fff;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--color-accent);}
+  .field-error{color:var(--color-danger);font-size:0.8125rem;margin-top:6px;display:none;}
+  .field.has-error input,.field.has-error select{border-color:var(--color-danger);}
+  .field.has-error .field-error{display:block;}
+  .field-row{display:grid;grid-template-columns:1fr;gap:var(--space-2);}
+  @media (min-width:560px){ .field-row{grid-template-columns:1fr 1fr;} }
+  .radio-grid{display:grid;grid-template-columns:1fr;gap:8px;}
+  @media (min-width:560px){ .radio-grid--2{grid-template-columns:1fr 1fr;} }
+
+  .file-drop{
+    border:2px dashed var(--color-border);border-radius:var(--radius-md);padding:var(--space-3);text-align:center;
+    cursor:pointer;transition:border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);position:relative;
+  }
+  .file-drop.drag-over,.file-drop:hover{border-color:var(--color-accent);background:var(--color-accent-tint);}
+  .file-drop input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+  .file-drop-label{font-size:0.9rem;font-weight:600;color:var(--color-primary);}
+  .file-chip{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--color-surface);
+    border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px;font-size:0.85rem;font-weight:600;color:var(--color-primary);
+  }
+  .file-chip button{background:none;border:none;color:#5b6b7f;cursor:pointer;font-size:1.1rem;line-height:1;padding:2px 6px;}
+  .doc-item{margin-bottom:var(--space-2);}
+  .doc-item .doc-name{font-weight:600;font-size:0.9rem;color:var(--color-primary);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;}
+  .doc-item .doc-optional{font-weight:400;color:#8a97a3;font-size:0.78rem;}
+
+  .consent-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--color-border-soft);}
+  .consent-item:last-of-type{border-bottom:none;}
+  .consent-item input{margin-top:4px;width:18px;height:18px;flex:0 0 auto;accent-color:var(--color-accent);}
+  .consent-item label{font-size:0.85rem;color:#4b5a66;font-weight:400;}
+  .app-nav{display:flex;justify-content:space-between;gap:12px;margin-top:var(--space-4);}
+  .app-autosave-note{text-align:center;font-size:0.78rem;color:#8a97a3;margin-top:var(--space-2);}
+
+  .disqualify-panel{background:var(--color-surface);border-radius:var(--radius-md);padding:var(--space-4);text-align:left;}
+  .disqualify-panel h3{color:var(--color-primary);font-size:1.15rem;margin-bottom:10px;}
+  .disqualify-panel p{color:#4b5a66;font-size:0.95rem;margin-bottom:var(--space-3);}
+
+  .confirm-panel{text-align:center;padding:var(--space-3) 0;}
+  .confirm-check{width:64px;height:64px;border-radius:50%;background:var(--color-success);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-3);}
+  .confirm-panel h3{font-size:1.4rem;color:var(--color-primary);margin-bottom:10px;font-weight:800;}
+  .confirm-panel p{color:#4b5a66;margin-bottom:6px;}
+
+  /* ---------- Final Reassurance ---------- */
+  .final{position:relative;overflow:hidden;text-align:center;padding:var(--space-8) 0;}
+  .final-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;}
+  .final-bg::after{content:"";position:absolute;inset:0;background:rgba(15,47,69,0.55);}
+  .final .container{position:relative;z-index:1;}
+  .final__statement{font-size:clamp(1.9rem,3.4vw + 1rem,3.2rem);font-weight:800;color:#fff;line-height:1.2;letter-spacing:-0.01em;max-width:820px;margin:0 auto var(--space-4);}
+
+  /* ---------- Footer ---------- */
+  .footer{background:var(--color-primary);color:rgba(255,255,255,0.85);padding:var(--space-6) 0 var(--space-4);}
+  .footer__grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);}
+  @media (min-width:800px){ .footer__grid{grid-template-columns:1.3fr 1fr 1fr;} }
+  .footer__logo{height:64px;margin-bottom:var(--space-2);filter:brightness(0) invert(1);}
+  .footer__blurb{font-size:0.9rem;max-width:38ch;color:rgba(255,255,255,0.65);}
+  .footer h4{font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.55);margin-bottom:var(--space-2);}
+  .footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:0.9rem;}
+  .footer__compliance{margin-top:var(--space-5);padding-top:var(--space-4);border-top:1px solid rgba(255,255,255,0.14);font-size:0.8rem;color:rgba(255,255,255,0.55);}
+  .footer__compliance p{margin-bottom:10px;max-width:820px;}
+  .footer__copyright{margin-top:var(--space-3);font-size:0.78rem;color:rgba(255,255,255,0.4);}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container">
+    <a href="#hero" aria-label="CapitalAssist — home">
+      <img class="nav__logo" src="assets/logo-mark.png" alt="CapitalAssist">
+    </a>
+    <div class="nav__actions">
+      <button class="btn btn--primary btn--sm js-cta-primary" type="button">Check If I Qualify</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-cta">
+  <button class="btn btn--primary btn--block js-cta-primary" type="button">Check If I Qualify</button>
+</div>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="hero">
+    <div class="container hero__grid">
+      <div>
+        <span class="hero__eyebrow">Your Funding Concierge</span>
+        <h1>Need Funding?<br>Let's Make A Plan.</h1>
+        <p class="hero__sub">Answer a few quick questions and we'll help you explore the most suitable funding solution for your situation.</p>
+        <div class="hero__ctas">
+          <button class="btn btn--primary btn--lg js-cta-primary" type="button">Check If I Qualify</button>
+        </div>
+        <div class="trust-bar">
+          <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>One Application</span>
+          <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Multiple Funding Partners</span>
+          <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>No Upfront Fees</span>
+          <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>South African Specialists</span>
+        </div>
+      </div>
+      <div>
+        <div class="video-wrap" id="vsl-wrap">
+          <span class="video-duration-badge">~1 Minute</span>
+          <button class="video-poster js-play-vsl" type="button" aria-label="Play: watch this before applying">
+            <img src="assets/video/vsl-poster.jpg" alt="CapitalAssist — watch this before applying">
+            <span class="play-btn">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="#0F2F45"><path d="M8 5v14l11-7z"></path></svg>
+            </span>
+            <span class="video-caption">Watch this before applying · ~1 Minute</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY THOUSANDS APPLY THE WRONG WAY + OLD WAY VS SMARTER WAY ============ -->
+  <section id="wrong-way" class="section">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Before You Apply Anywhere Else</span>
+        <h2>Why Thousands Of South Africans Apply The Wrong Way</h2>
+        <p>Most people don't get turned down because they don't qualify anywhere. They get turned down because of how they applied.</p>
+      </div>
+
+      <div class="reasons-grid">
+        <div class="reason-card" data-reveal>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+          <div><h3>Multiple Enquiries</h3><p>Every bank you approach runs its own credit check. Each one leaves a mark, even when you're eventually approved somewhere else.</p></div>
+        </div>
+        <div class="reason-card" data-reveal>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg></div>
+          <div><h3>Wasted Time</h3><p>Different forms, different call centres, different waiting periods — all for the one outcome you're actually trying to reach.</p></div>
+        </div>
+        <div class="reason-card" data-reveal>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+          <div><h3>Different Paperwork, Different Criteria</h3><p>What one bank wants isn't what the next one wants. You end up collecting the same documents three or four times over.</p></div>
+        </div>
+        <div class="reason-card" data-reveal>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
+          <div><h3>Rejected For Avoidable Reasons</h3><p>Sometimes it's not about affordability at all. It's a mismatch between your situation and one particular lender's box-ticking criteria.</p></div>
+        </div>
+      </div>
+
+      <p class="transition-line" data-reveal>That's exactly why we built CapitalAssist differently.</p>
+
+      <div class="compare" data-reveal>
+        <div class="compare-col compare-col--old">
+          <h3>Old Way</h3>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Apply everywhere</div>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Multiple applications</div>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>No guidance</div>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Uncertainty</div>
+        </div>
+        <div class="compare-col compare-col--new">
+          <h3>CapitalAssist</h3>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>One application</div>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Professional assessment</div>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Funding partner network</div>
+          <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Personal guidance</div>
+        </div>
+      </div>
+      <div class="section-cta"><button class="btn btn--dark btn--lg js-cta-primary" type="button">Check If I Qualify</button></div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT DO YOU NEED (decision tree / problem-first) ============ -->
+  <section id="need" class="section section--alt">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Let's Start With Your Situation</span>
+        <h2>What Do You Need?</h2>
+        <p>Choose whichever is closest — it takes you straight into your Funding Concierge Score.</p>
+      </div>
+      <div class="need-grid">
+        <button class="need-card js-need-card" type="button" data-intent="vehicle_refinance" data-reveal>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 12a9 9 0 1 1 9 9"></path><polyline points="3 12 8 7 8 17"></polyline></svg></span>
+          <h3>I Need Lower Monthly Payments</h3>
+          <p>Refinance your vehicle and stretch your term for breathing room every month.</p>
+          <span class="arrow">Check my score →</span>
+        </button>
+        <button class="need-card js-need-card" type="button" data-intent="cash_against_vehicle" data-reveal>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle></svg></span>
+          <h3>I Need Cash</h3>
+          <p>Unlock the equity in your vehicle — without selling it.</p>
+          <span class="arrow">Check my score →</span>
+        </button>
+        <button class="need-card js-need-card" type="button" data-intent="balloon_payment" data-reveal>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg></span>
+          <h3>My Balloon Payment Is Due</h3>
+          <p>Settle it over a longer term instead of one lump sum.</p>
+          <span class="arrow">Check my score →</span>
+        </button>
+        <button class="need-card js-need-card" type="button" data-intent="debt_consolidation" data-reveal>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"></path></svg></span>
+          <h3>I Need To Consolidate Debt</h3>
+          <p>Combine what you owe into one simpler monthly repayment.</p>
+          <span class="arrow">Check my score →</span>
+        </button>
+        <button class="need-card js-need-card" type="button" data-intent="commercial_vehicle" data-reveal>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></span>
+          <h3>I Need Business Finance</h3>
+          <p>Free up cash flow using a commercial vehicle you already own.</p>
+          <span class="arrow">Check my score →</span>
+        </button>
+        <button class="need-card js-need-card" type="button" data-intent="property_backed" data-reveal>
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span>
+          <h3>I Want Property-Backed Funding</h3>
+          <p>Access funding secured against property you own.</p>
+          <span class="arrow">Check my score →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how" class="section">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">The Process</span>
+        <h2>How It Works</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline__step" data-reveal><div class="timeline__num">1</div><h3>One Application</h3><p>Tell us your situation once. That's the only form you'll fill in.</p></div>
+        <div class="timeline__step" data-reveal><div class="timeline__num">2</div><h3>Assessment</h3><p>We review your answers and match you with partners who genuinely fit your profile.</p></div>
+        <div class="timeline__step" data-reveal><div class="timeline__num">3</div><h3>Funding Partner Review</h3><p>Our network assesses your application under their own credit and affordability criteria.</p></div>
+        <div class="timeline__step" data-reveal><div class="timeline__num">4</div><h3>Outcome</h3><p>You hear back with a clear next step — an offer, or honest guidance on what to do instead.</p></div>
+      </div>
+      <div class="section-cta"><button class="btn btn--primary btn--lg js-cta-primary" type="button">Check If I Qualify</button></div>
+    </div>
+  </section>
+
+  <!-- ============ FUNDING CONCIERGE SCORE ============ -->
+  <section id="concierge-score" class="section section--alt">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Free · No Obligation · No Credit Check</span>
+        <h2>Let's Calculate Your Funding Concierge Score™</h2>
+        <p>Takes about 45 seconds and tells you exactly where you stand before you commit to anything.</p>
+      </div>
+
+      <div class="quiz-card" data-reveal>
+        <div class="quiz-visual"><img src="assets/images/concierge-score-visual.png" alt=""></div>
+        <div id="quiz-progress-wrap">
+          <div class="quiz-step-label" id="quiz-step-label">Question 1 of 6</div>
+          <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
+        </div>
+        <div id="quiz-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY CAPITALASSIST ============ -->
+  <section id="why-us" class="section why-section">
+    <div class="why-bg" style="background-image:url('assets/images/why-capitalassist-texture.png')"></div>
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Why CapitalAssist</span>
+        <h2>We'll Make A Plan</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7z"></path></svg></span><h3>We'll Make A Plan</h3><p>Whatever your situation, we're focused on finding a genuine way forward — not just processing paperwork.</p></div>
+        <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span><h3>One Application</h3><p>Complete your details once. We do the running around between funding partners, not you.</p></div>
+        <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="9" cy="7" r="4"></circle><path d="M17 11a4 4 0 1 0-4-4"></path><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg></span><h3>Funding Partner Network</h3><p>We work with a range of registered funding partners, so you're not limited to what one single bank can offer.</p></div>
+        <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg></span><h3>No Upfront Fees</h3><p>You don't pay us to apply, and there's no fee if your application isn't successful.</p></div>
+        <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><h3>Dedicated Consultant</h3><p>A real person guides you through the process and explains your options in plain language.</p></div>
+        <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span><h3>Transparent Process</h3><p>No hidden surprises. We tell you exactly where you stand, honestly, at every step.</p></div>
+      </div>
+      <div class="section-cta"><button class="btn btn--dark btn--lg js-cta-primary" type="button">Check If I Qualify</button></div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list" data-reveal>
+        <details class="faq-item"><summary>Can I apply with poor credit?<span class="plus"></span></summary><p>Yes, it's worth applying. Because funding through our partners is often secured against an asset, some applications go through where unsecured credit wouldn't. We'll always be honest with you about where you stand — even when the answer is "not yet."</p></details>
+        <details class="faq-item"><summary>Can I still use my vehicle?<span class="plus"></span></summary><p>In most cases, yes. You keep driving and using your vehicle as normal — ownership stays with you throughout, provided you meet your repayment obligations.</p></details>
+        <details class="faq-item"><summary>Will I pay upfront fees?<span class="plus"></span></summary><p>No. There are no upfront fees for using CapitalAssist to explore your options, and there's no fee if your application isn't successful. Any fees connected to a specific funding agreement are set out clearly by the funding partner before you sign anything.</p></details>
+        <details class="faq-item"><summary>How long does it take?<span class="plus"></span></summary><p>Your Funding Concierge Score takes about 45 seconds. From there, a consultant is typically in touch within one working day, and timelines to a final outcome depend on which funding partner and product is the right fit for you.</p></details>
+        <details class="faq-item"><summary>What documents do I need?<span class="plus"></span></summary><p>Typically a South African ID, your driver's licence, proof of address, your latest 3 months' payslips and bank statements, and — where relevant — your vehicle or property documents. We'll tell you exactly what's needed for your specific application.</p></details>
+        <details class="faq-item"><summary>Is my information safe?<span class="plus"></span></summary><p>Yes. We handle your personal information in line with POPIA, and we only share what's necessary with the funding partners assessing your application.</p></details>
+        <details class="faq-item"><summary>Am I obligated to accept an offer?<span class="plus"></span></summary><p>Not at all. Getting your Funding Concierge Score and completing an application costs you nothing and commits you to nothing. You decide if and when you want to go ahead.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLICATION ============ -->
+  <section id="application" class="section section--alt">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Almost There</span>
+        <h2>Let's Get Your Plan Moving</h2>
+        <p>A few details, and your consultant takes it from here.</p>
+      </div>
+
+      <div class="app-card" data-reveal>
+        <div id="app-resume-banner" class="app-resume" style="display:none;">
+          <span>Welcome back — we saved your progress.</span>
+          <button class="btn btn--dark btn--sm" type="button" id="app-resume-btn">Continue</button>
+        </div>
+        <div id="app-progress-wrap">
+          <div class="app-progress-label"><span id="app-step-label">Step 1 of 5</span><span id="app-step-name">Your Details</span></div>
+          <div class="quiz-progress-track"><div class="quiz-progress-fill" id="app-progress-fill"></div></div>
+        </div>
+        <form id="app-form" novalidate>
+          <!-- GHL-EMBED: Replace this entire multi-step form with a native HighLevel Form element once embedded in a HighLevel funnel page. Field-by-field mapping lives in docs/highlevel-build-spec.md. -->
+          <div id="app-steps"></div>
+        </form>
+        <div id="app-confirm" style="display:none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL REASSURANCE ============ -->
+  <section id="final" class="final">
+    <div class="final-bg" style="background-image:url('assets/images/final-cta-visual.png')"></div>
+    <div class="container">
+      <p class="final__statement">If there's a way forward…<br>we'll help you find it.</p>
+      <button class="btn btn--primary btn--lg js-cta-primary" type="button">Continue My Plan</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ TRUST FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img class="footer__logo" src="assets/logo-mark.png" alt="CapitalAssist">
+        <p class="footer__blurb">CapitalAssist helps qualifying South Africans explore funding solutions through a network of funding partners.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>150 Soutpansberg Rd, Riviera, Pretoria, Gauteng, 0084, South Africa</li>
+          <li><a href="mailto:info@capitalassist.co.za">info@capitalassist.co.za</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <!-- GHL-EMBED: point these at real published Privacy Policy / Terms / POPIA pages once built. -->
+          <li>Privacy Policy</li>
+          <li>Terms &amp; Conditions</li>
+          <li>POPIA Policy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__compliance">
+      <p>CapitalAssist is not a lender. We work with a network of registered funding partners.</p>
+      <p>Funding is subject to affordability assessments and the lending criteria of participating funding partners.</p>
+      <p class="footer__copyright">© 2026 CapitalAssist. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- GHL-EMBED: insert Meta Pixel / Google Ads conversion / GHL tracking scripts here. -->
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Shared state ---------------- */
+  var STATE_KEY = 'ca_funnel_state';
+  var CA_STATE = {};
+  try{
+    var saved = localStorage.getItem(STATE_KEY);
+    if (saved) CA_STATE = JSON.parse(saved);
+  }catch(e){ CA_STATE = {}; }
+
+  function saveState(){
+    try{ localStorage.setItem(STATE_KEY, JSON.stringify(CA_STATE)); }catch(e){}
+  }
+
+  /* ---------------- Webhook capture — exactly one call per completed outcome ---------------- */
+  var MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/3lolb2snvuuwddny5j4rvhybuov8163j';
+
+  function sendWebhookEntry(status, extra){
+    if (!MAKE_WEBHOOK_URL) return;
+    var app = CA_STATE.appData || {};
+    var qa = CA_STATE.quizAnswers || {};
+    var liteName = extra && extra.name;
+    var liteEmail = extra && extra.email;
+    var litePhone = extra && extra.phone;
+    var fullName = ((app.first_name||'') + ' ' + (app.last_name||'')).trim();
+    var intentCode = app.intent || qa.intent || '';
+    // Normalized fields — always populated from whichever source is available at this
+    // point in the funnel (quiz-only, application, or the disqualified-lead mini-form),
+    // so every event type is usable in Slack/email without knowing which stage sent it.
+    var payload = {
+      status: status,
+      sent_at: new Date().toISOString(),
+      page_url: location.href,
+      contact_name: fullName || liteName || '',
+      contact_email: app.email || liteEmail || '',
+      contact_phone: app.phone || litePhone || '',
+      funding_need: (typeof INTENT_LABELS !== 'undefined' && INTENT_LABELS[intentCode]) || intentCode,
+      funding_amount: app.loan_amount || qa.amount || '',
+      funding_security: app.asset_type || qa.security || '',
+      concierge_tier: CA_STATE.quizTier || null,
+      application: app,
+      concierge_answers: qa
+    };
+    if (extra){
+      for (var k in extra){ if (extra.hasOwnProperty(k)) payload[k] = extra[k]; }
+    }
+    try{
+      fetch(MAKE_WEBHOOK_URL, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        keepalive:true,
+        body: JSON.stringify(payload)
+      }).catch(function(){});
+    }catch(e){}
+  }
+
+  function smoothScrollTo(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var navH = document.querySelector('.nav').offsetHeight;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
+    window.scrollTo({top:top, behavior:'smooth'});
+  }
+
+  /* ---------------- Primary CTA (smart routing) ---------------- */
+  document.querySelectorAll('.js-cta-primary').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (CA_STATE.quizCompleted) {
+        smoothScrollTo('application');
+      } else {
+        smoothScrollTo('concierge-score');
+      }
+    });
+  });
+
+  /* ---------------- Need cards → pre-select intent, jump to quiz ---------------- */
+  document.querySelectorAll('.js-need-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      CA_STATE.intent = card.getAttribute('data-intent');
+      saveState();
+      smoothScrollTo('concierge-score');
+      if (window.CAQuiz) window.CAQuiz.jumpToIntentConfirm();
+    });
+  });
+
+  /* ---------------- Video facade ---------------- */
+  document.querySelectorAll('.js-play-vsl').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var wrap = btn.closest('.video-wrap');
+      var video = document.createElement('video');
+      video.setAttribute('controls','');
+      video.setAttribute('playsinline','');
+      video.setAttribute('preload','auto');
+      video.poster = 'assets/video/vsl-poster.jpg';
+      var mp4 = document.createElement('source'); mp4.src='assets/video/vsl.mp4'; mp4.type='video/mp4';
+      var webm = document.createElement('source'); webm.src='assets/video/vsl.webm'; webm.type='video/webm';
+      video.appendChild(mp4); video.appendChild(webm);
+      wrap.innerHTML='';
+      wrap.appendChild(video);
+      video.play().catch(function(){});
+    });
+  });
+
+  /* ---------------- Scroll reveal ---------------- */
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ================================================================
+     FUNDING CONCIERGE SCORE QUIZ
+  ================================================================= */
+  var QUIZ_QUESTIONS = [
+    {
+      id:'intent', type:'radio', prompt:'What do you need funding for?',
+      options:[
+        {v:'vehicle_refinance', l:'I need lower monthly payments'},
+        {v:'cash_against_vehicle', l:'I need cash'},
+        {v:'balloon_payment', l:'My balloon payment is due'},
+        {v:'debt_consolidation', l:'I need to consolidate debt'},
+        {v:'commercial_vehicle', l:'I need business finance'},
+        {v:'property_backed', l:'I want property-backed funding'}
+      ]
+    },
+    {
+      id:'eligible_base', type:'radio', prompt:"Are you 18 or older, with a credit record that's clear of blacklisting, debt review or insolvency?",
+      options:[{v:'yes',l:'Yes, that\'s me'},{v:'no',l:'No / not sure'}],
+      hardGate:true
+    },
+    {
+      id:'employment', type:'radio', prompt:"What's your employment situation?",
+      options:[
+        {v:'employed', l:'Employed full-time'},
+        {v:'self_employed', l:'Self-employed'},
+        {v:'contract', l:'Contract or freelance work'},
+        {v:'unemployed', l:'Not currently employed'}
+      ]
+    },
+    {
+      id:'income', type:'radio', prompt:"Roughly, what's your monthly income after expenses?",
+      options:[
+        {v:'under8', l:'Under R8,000'},
+        {v:'8to15', l:'R8,000 – R15,000'},
+        {v:'15to30', l:'R15,000 – R30,000'},
+        {v:'30plus', l:'R30,000 or more'}
+      ]
+    },
+    {
+      id:'amount', type:'number', prompt:'How much funding are you hoping to access?',
+      placeholder:'e.g. 80000', hint:'Our funding partners currently work with funding needs of R30,000 and above.'
+    },
+    {
+      id:'security', type:'radio', prompt:'Do you have a vehicle or property you could use to secure funding?',
+      options:[
+        {v:'vehicle', l:'Vehicle I own'},
+        {v:'property', l:'Property I own'},
+        {v:'both', l:'Both'},
+        {v:'neither', l:'Neither yet'}
+      ]
+    }
+  ];
+
+  var WARNING_ICON_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+
+  var quizStep = 0;
+  var quizAnswers = CA_STATE.quizAnswers || {};
+  var quizPendingAdvance = null;
+  var quizBody = document.getElementById('quiz-body');
+  var quizStepLabel = document.getElementById('quiz-step-label');
+  var quizProgressFill = document.getElementById('quiz-progress-fill');
+  var quizProgressWrap = document.getElementById('quiz-progress-wrap');
+
+  function renderQuiz(){
+    if (quizPendingAdvance){ clearTimeout(quizPendingAdvance); quizPendingAdvance = null; }
+    if (quizStep >= QUIZ_QUESTIONS.length){
+      renderQuizResult();
+      return;
+    }
+    var q = QUIZ_QUESTIONS[quizStep];
+    quizStepLabel.textContent = 'Question ' + (quizStep+1) + ' of ' + QUIZ_QUESTIONS.length;
+    quizProgressFill.style.width = Math.round(((quizStep)/QUIZ_QUESTIONS.length)*100) + '%';
+    quizProgressWrap.style.display='';
+
+    var html = '<div class="quiz-question">' + escapeHtml(q.prompt) + '</div>';
+    if (q.type==='radio'){
+      html += '<div class="quiz-options" role="radiogroup">';
+      q.options.forEach(function(opt){
+        var selected = quizAnswers[q.id]===opt.v ? ' selected' : '';
+        html += '<button type="button" class="option-btn' + selected + '" data-value="' + opt.v + '"><span>' + escapeHtml(opt.l) + '</span><span class="check">' + (quizAnswers[q.id]===opt.v ? '&#10003;' : '') + '</span></button>';
+      });
+      html += '</div>';
+    } else if (q.type==='number'){
+      html += '<input type="number" min="0" step="1000" class="quiz-number-input" id="quiz-number-input" placeholder="' + q.placeholder + '" value="' + (quizAnswers[q.id]||'') + '">';
+      if (q.hint) html += '<p class="quiz-hint">' + escapeHtml(q.hint) + '</p>';
+    }
+    html += '<div class="quiz-nav">';
+    html += quizStep>0 ? '<button type="button" class="btn btn--ghost" id="quiz-back">Back</button>' : '<span></span>';
+    html += '<button type="button" class="btn btn--primary" id="quiz-next">' + (quizStep===QUIZ_QUESTIONS.length-1 ? 'See My Score' : 'Next') + '</button>';
+    html += '</div>';
+
+    quizBody.innerHTML = html;
+
+    if (q.type==='radio'){
+      quizBody.querySelectorAll('.option-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var value = btn.getAttribute('data-value');
+          quizAnswers[q.id] = value;
+          saveQuizProgress();
+          var isDisqualifyingAnswer = (q.hardGate && value === 'no');
+          if (isDisqualifyingAnswer){
+            quizBody.querySelectorAll('.option-btn, .quiz-nav button').forEach(function(b){ b.disabled = true; });
+            btn.classList.add('flagged');
+            btn.querySelector('.check').innerHTML = '&#10003;';
+            var flagMsg = document.createElement('div');
+            flagMsg.className = 'quiz-flag-note';
+            flagMsg.innerHTML = WARNING_ICON_SVG + '<span>This is the answer that determines your result — checking it now…</span>';
+            quizBody.querySelector('.quiz-nav').insertAdjacentElement('beforebegin', flagMsg);
+            quizPendingAdvance = setTimeout(function(){ quizPendingAdvance=null; quizStep++; renderQuiz(); }, 900);
+          } else {
+            quizStep++;
+            renderQuiz();
+          }
+        });
+      });
+    }
+    var nextBtn = document.getElementById('quiz-next');
+    nextBtn.addEventListener('click', function(){
+      if (q.type==='number'){
+        var inputEl = document.getElementById('quiz-number-input');
+        var val = inputEl.value;
+        if (!val || Number(val) <= 0){
+          inputEl.focus();
+          return;
+        }
+        quizAnswers[q.id] = Number(val);
+        saveQuizProgress();
+        if (Number(val) < 30000){
+          inputEl.classList.add('flagged');
+          quizBody.querySelectorAll('.quiz-nav button').forEach(function(b){ b.disabled = true; });
+          var flagMsg = document.createElement('div');
+          flagMsg.className = 'quiz-flag-note';
+          flagMsg.innerHTML = WARNING_ICON_SVG + '<span>That\'s below our R30,000 minimum — this is what determines your result. Checking now…</span>';
+          inputEl.insertAdjacentElement('afterend', flagMsg);
+          quizPendingAdvance = setTimeout(function(){ quizPendingAdvance=null; quizStep++; renderQuiz(); }, 900);
+          return;
+        }
+      } else if (q.type==='radio' && !quizAnswers[q.id]){
+        return;
+      }
+      quizStep++;
+      saveQuizProgress();
+      renderQuiz();
+    });
+    var backBtn = document.getElementById('quiz-back');
+    if (backBtn) backBtn.addEventListener('click', function(){ quizStep = Math.max(0, quizStep-1); renderQuiz(); });
+  }
+
+  function saveQuizProgress(){
+    CA_STATE.quizAnswers = quizAnswers;
+    saveState();
+  }
+
+  function escapeHtml(str){
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderQuizResult(){
+    quizProgressWrap.style.display='none';
+
+    // Hard gates — factual eligibility only, never a scored/subjective decline.
+    if (quizAnswers.eligible_base === 'no'){
+      renderNotEligible("Our funding partners need applicants to be 18 or older, with a credit record that's clear of blacklisting, debt review or insolvency. Based on your answer, that's not the case for you right now.", "That doesn't mean never — it means not through this route, today. Leave your details below and we'll reach out the moment your circumstances change.");
+      return;
+    }
+    if (quizAnswers.amount && Number(quizAnswers.amount) < 30000){
+      renderNotEligible("Right now, our funding partners work with funding needs of R30,000 and above. Based on what you've told us, your amount is below that threshold.", "Leave your details below and we'll let you know if that changes.");
+      return;
+    }
+
+    var points = 0;
+    if (quizAnswers.employment==='employed' || quizAnswers.employment==='self_employed') points += 2;
+    else if (quizAnswers.employment==='contract') points += 1;
+    if (quizAnswers.income==='30plus') points += 3;
+    else if (quizAnswers.income==='15to30') points += 2;
+    else if (quizAnswers.income==='8to15') points += 1;
+    if (quizAnswers.security==='both') points += 2;
+    else if (quizAnswers.security==='vehicle' || quizAnswers.security==='property') points += 2;
+
+    var tier = points >= 5 ? 'excellent' : 'possible';
+    CA_STATE.quizCompleted = true;
+    CA_STATE.quizTier = tier;
+    CA_STATE.intent = quizAnswers.intent || CA_STATE.intent;
+    saveState();
+    // Not sent to the webhook — this is an intermediate outcome, tracked client-side
+    // only. Only application_completed and not_eligible_lead_captured reach Make.com.
+
+    var starsHtml, title, body;
+    if (tier==='excellent'){
+      starsHtml = starRow(5);
+      title = 'Excellent';
+      body = '<p>Based on your answers, you\'re likely a strong candidate for one or more of our funding partners.</p>' +
+             '<p><strong>Can we help everyone? No.</strong> And that\'s exactly why this matters — when we tell you there\'s a path worth exploring, it\'s because we genuinely believe it.</p>' +
+             '<p>Let\'s get your plan started.</p>';
+    } else {
+      starsHtml = starRow(3);
+      title = 'Possible';
+      body = '<p>There may be options available, but your situation needs a closer look before we can say for sure.</p>' +
+             '<p><strong>Can we help everyone? No.</strong> And that\'s exactly why this matters — we\'d rather tell you the truth than promise something we can\'t deliver.</p>' +
+             '<p>Let\'s have a consultant assess your situation properly.</p>';
+    }
+
+    quizBody.innerHTML =
+      '<div class="quiz-result">' +
+        '<div class="stars">' + starsHtml + '</div>' +
+        '<div class="quiz-result-title">' + title + '</div>' +
+        '<div class="quiz-result-body">' + body + '</div>' +
+        '<button type="button" class="btn btn--primary btn--lg btn--block" id="quiz-continue">Continue My Plan</button>' +
+      '</div>';
+
+    document.getElementById('quiz-continue').addEventListener('click', function(){
+      smoothScrollTo('application');
+      if (window.CAApp) window.CAApp.prefillFromQuiz();
+    });
+  }
+
+  function renderNotEligible(reason, followUp){
+    CA_STATE.quizCompleted = false;
+    CA_STATE.quizTier = 'not_eligible';
+    saveState();
+    // Not sent to the webhook here either — only fires below if they actually
+    // submit the lite-capture lead form (not_eligible_lead_captured).
+    quizBody.innerHTML =
+      '<div class="quiz-result">' +
+        '<div class="stars">' + starRow(1) + '</div>' +
+        '<div class="quiz-result-title">Not Eligible Yet</div>' +
+        '<div class="quiz-reason-callout">' + WARNING_ICON_SVG + '<p>' + escapeHtml(reason) + '</p></div>' +
+        '<div class="quiz-result-body"><p>' + escapeHtml(followUp) + '</p></div>' +
+        '<div class="quiz-lite-capture">' +
+          '<div class="field"><label for="lite-name">Full name</label><input type="text" id="lite-name" placeholder="Your name"></div>' +
+          '<div class="field"><label for="lite-email">Email</label><input type="email" id="lite-email" placeholder="you@example.com"></div>' +
+          '<div class="field"><label for="lite-phone">Phone</label><input type="tel" id="lite-phone" placeholder="082 000 0000"></div>' +
+          '<button type="button" class="btn btn--dark btn--block" id="lite-submit">Keep Me Posted</button>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('lite-submit').addEventListener('click', function(){
+      var liteEntry = {
+        name: document.getElementById('lite-name').value,
+        email: document.getElementById('lite-email').value,
+        phone: document.getElementById('lite-phone').value,
+        not_eligible_reason: reason
+      };
+      CA_STATE.liteCapture = liteEntry;
+      saveState();
+      sendWebhookEntry('not_eligible_lead_captured', liteEntry);
+      quizBody.innerHTML = '<div class="quiz-result"><div class="quiz-result-title">Thanks — noted.</div><div class="quiz-result-body"><p>We\'ll be in touch the moment things change. In the meantime, feel free to browse how CapitalAssist works above.</p></div></div>';
+    });
+  }
+
+  function starRow(litCount){
+    var out = '';
+    for (var i=1;i<=5;i++){
+      out += i<=litCount ? '<span class="lit">★</span>' : '<span>★</span>';
+    }
+    return out;
+  }
+
+  renderQuiz();
+
+  window.CAQuiz = {
+    jumpToIntentConfirm:function(){
+      quizStep = 0;
+      renderQuiz();
+    }
+  };
+
+  /* ================================================================
+     APPLICATION — multi-step form
+  ================================================================= */
+  // GHL-EMBED: set this to a GHL Workflow "Inbound Webhook" trigger URL to forward
+  // real submissions into HighLevel. See docs/highlevel-build-spec.md §5.
+  // Leave blank to keep this build fully standalone (local confirmation only).
+  var GHL_WEBHOOK_URL = '';
+  var PROVINCES = ['Eastern Cape','Free State','Gauteng','KwaZulu-Natal','Limpopo','Mpumalanga','North West','Northern Cape','Western Cape'];
+  var INTENT_LABELS = {
+    vehicle_refinance:'Lower monthly payments (vehicle refinance)',
+    cash_against_vehicle:'Cash against my vehicle',
+    balloon_payment:'Settle my balloon payment',
+    debt_consolidation:'Consolidate my debt',
+    commercial_vehicle:'Business / commercial vehicle finance',
+    property_backed:'Property-backed funding'
+  };
+  var APP_STEP_NAMES = ['Your Details','Location','Confirm Your Funding','How You Heard About Us','Consent'];
+  var appStep = 0;
+  var appData = CA_STATE.appData || {};
+
+  var appStepsEl = document.getElementById('app-steps');
+  var appStepLabel = document.getElementById('app-step-label');
+  var appStepName = document.getElementById('app-step-name');
+  var appProgressFill = document.getElementById('app-progress-fill');
+  var appForm = document.getElementById('app-form');
+  var appConfirm = document.getElementById('app-confirm');
+  var appResumeBanner = document.getElementById('app-resume-banner');
+
+  if (CA_STATE.appDraftExists){
+    appResumeBanner.style.display='flex';
+    document.getElementById('app-resume-btn').addEventListener('click', function(){
+      appResumeBanner.style.display='none';
+      appStep = CA_STATE.appStep || 0;
+      renderAppStep();
+    });
+  }
+
+  function updateAppProgress(){
+    appStepLabel.textContent = 'Step ' + (appStep+1) + ' of 5';
+    appStepName.textContent = APP_STEP_NAMES[appStep];
+    appProgressFill.style.width = Math.round((appStep/4)*100) + '%';
+  }
+
+  function renderAppStep(){
+    updateAppProgress();
+    var html = '';
+    if (appStep===0){
+      html += fieldRow([
+        field('text','first_name','First name', appData.first_name, true),
+        field('text','last_name','Surname', appData.last_name, true)
+      ]);
+      html += fieldRow([
+        field('email','email','Email', appData.email, true),
+        field('tel','phone','Phone', appData.phone, true)
+      ]);
+    } else if (appStep===1){
+      html += field('text','city','Current city of residence', appData.city, true);
+      html += selectField('province','Province', PROVINCES, appData.province, true);
+    } else if (appStep===2){
+      html += '<div class="field"><label>What do you need funding for?</label>' + selectOptionsRadio('intent', Object.keys(INTENT_LABELS).map(function(k){return {v:k,l:INTENT_LABELS[k]};}), appData.intent) + '</div>';
+      html += field('number','loan_amount','How much funding do you need? (R)', appData.loan_amount, true);
+      html += '<div class="field"><label>What will you use to secure funding?</label>' + selectOptionsRadio('asset_type', [
+        {v:'Motor vehicle', l:'Motor vehicle'},
+        {v:'Motorcycle', l:'Motorcycle'},
+        {v:'Commercial motor vehicle', l:'Commercial motor vehicle'},
+        {v:'Property', l:'Property'},
+        {v:"Spouse, partner or relative's vehicle", l:"Spouse, partner or relative's vehicle"}
+      ], appData.asset_type) + '</div>';
+    } else if (appStep===3){
+      html += selectField('lead_source','How did you hear about us?', ['Google','Facebook','Magazine','Radio','Referred by a friend','Other'], appData.lead_source, true);
+      if (appData.lead_source==='Other'){
+        html += field('text','lead_source_other','Please specify', appData.lead_source_other, false);
+      }
+    } else if (appStep===4){
+      html += '<div class="quiz-flag-note" style="margin-bottom:var(--space-3);">' + WARNING_ICON_SVG + '<span>No documents needed right now — your consultant will contact you separately with a secure way to send your ID, payslips and other paperwork.</span></div>';
+      html += consentItem('consent_credit_enquiry', 'I certify that all information and representations are true, and I consent to CapitalAssist and its network of NCR-registered funding partners making enquiries about my credit record with any credit bureau to confirm the details of this application.');
+      html += consentItem('consent_popia', 'I authorise CapitalAssist to process my personal information in line with POPIA, and to share what is necessary with its network of funding partners for the purpose of this application.');
+      html += consentItem('consent_credit_check', 'I authorise a credit check on me, and where applicable on my company and its directors.');
+      html += consentItem('consent_terms', 'I agree to the CapitalAssist Terms & Conditions and Privacy Policy.');
+    }
+
+    appStepsEl.innerHTML = html;
+    bindStepInputs();
+    renderNav();
+  }
+
+  function field(type,id,label,value,required){
+    return '<div class="field" data-field="' + id + '"><label for="f_' + id + '">' + escapeHtml(label) + (required?' *':'') + '</label>' +
+      '<input type="' + type + '" id="f_' + id + '" name="' + id + '" value="' + escapeHtml((value||'').toString()) + '"' + (required?' required':'') + '>' +
+      '<div class="field-error">Please complete this field.</div></div>';
+  }
+  function fieldRow(fields){ return '<div class="field-row">' + fields.join('') + '</div>'; }
+  function selectField(id,label,options,value,required){
+    var html = '<div class="field" data-field="' + id + '"><label for="f_' + id + '">' + escapeHtml(label) + (required?' *':'') + '</label><select id="f_' + id + '" name="' + id + '"' + (required?' required':'') + '><option value="">Select…</option>';
+    options.forEach(function(opt){ html += '<option value="' + escapeHtml(opt) + '"' + (value===opt?' selected':'') + '>' + escapeHtml(opt) + '</option>'; });
+    html += '</select><div class="field-error">Please make a selection.</div></div>';
+    return html;
+  }
+  function selectOptionsRadio(name, options, currentValue){
+    var html = '<div class="radio-grid radio-grid--2" data-radio-name="' + name + '">';
+    options.forEach(function(opt){
+      var checked = currentValue===opt.v ? ' selected' : '';
+      html += '<button type="button" class="option-btn' + checked + '" data-radio="' + name + '" data-value="' + escapeHtml(opt.v.toString()) + '"><span>' + escapeHtml(opt.l) + '</span><span class="check">' + (currentValue===opt.v?'&#10003;':'') + '</span></button>';
+    });
+    html += '</div>';
+    return html;
+  }
+  function consentItem(id, text){
+    var checked = appData[id] ? ' checked' : '';
+    return '<div class="consent-item"><input type="checkbox" id="c_' + id + '" name="' + id + '"' + checked + '><label for="c_' + id + '">' + text + '</label></div>';
+  }
+
+  function bindStepInputs(){
+    appStepsEl.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=number]').forEach(function(inp){
+      inp.addEventListener('input', function(){
+        appData[inp.name] = inp.value;
+        persistAppData();
+      });
+    });
+    appStepsEl.querySelectorAll('select').forEach(function(sel){
+      sel.addEventListener('change', function(){
+        appData[sel.name] = sel.value;
+        persistAppData();
+        if (sel.name==='lead_source') renderAppStep();
+      });
+    });
+    appStepsEl.querySelectorAll('[data-radio]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var name = btn.getAttribute('data-radio');
+        appData[name] = btn.getAttribute('data-value');
+        persistAppData();
+        appStepsEl.querySelectorAll('[data-radio="'+name+'"]').forEach(function(b){
+          b.classList.toggle('selected', b===btn);
+          b.querySelector('.check').innerHTML = b===btn ? '&#10003;' : '';
+        });
+      });
+    });
+    appStepsEl.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        appData[cb.name] = cb.checked;
+        persistAppData();
+      });
+    });
+  }
+
+  function persistAppData(){
+    CA_STATE.appData = appData;
+    CA_STATE.appStep = appStep;
+    CA_STATE.appDraftExists = true;
+    saveState();
+  }
+
+  function validateStep(){
+    var ok = true;
+    appStepsEl.querySelectorAll('[required]').forEach(function(inp){
+      var wrap = inp.closest('.field');
+      if (!inp.value){ wrap.classList.add('has-error'); ok=false; }
+      else wrap.classList.remove('has-error');
+    });
+    if (appStep===2){
+      if (!appData.intent || !appData.asset_type){ ok=false; }
+    }
+    if (appStep===4){
+      ['consent_credit_enquiry','consent_popia','consent_credit_check','consent_terms'].forEach(function(id){
+        if (!appData[id]) ok=false;
+      });
+    }
+    return ok;
+  }
+
+  function renderNav(){
+    var navHtml = '<div class="app-nav">';
+    navHtml += appStep>0 ? '<button type="button" class="btn btn--ghost" id="app-back">Back</button>' : '<span></span>';
+    navHtml += '<button type="button" class="btn btn--primary" id="app-next">' + (appStep===4 ? 'Complete My Plan' : 'Continue') + '</button>';
+    navHtml += '</div><p class="app-autosave-note">Your progress is saved automatically on this device.</p>';
+    appStepsEl.insertAdjacentHTML('beforeend', navHtml);
+    document.getElementById('app-next').addEventListener('click', function(){
+      if (!validateStep()) return;
+      if (appStep===4){ submitApplication(); return; }
+      appStep++;
+      persistAppData();
+      renderAppStep();
+      window.scrollTo({top: appForm.getBoundingClientRect().top + window.pageYOffset - 100, behavior:'smooth'});
+    });
+    var backBtn = document.getElementById('app-back');
+    if (backBtn) backBtn.addEventListener('click', function(){ appStep = Math.max(0, appStep-1); persistAppData(); renderAppStep(); });
+  }
+
+  function buildSubmissionPayload(){
+    var qa = (CA_STATE.quizAnswers) || {};
+    return {
+      submitted_at: new Date().toISOString(),
+      first_name: appData.first_name, last_name: appData.last_name,
+      email: appData.email, phone: appData.phone,
+      city: appData.city, ca_province: appData.province,
+      ca_intent: appData.intent, ca_loan_amount: appData.loan_amount, ca_asset_type: appData.asset_type,
+      lead_source: appData.lead_source, ca_lead_source_detail: appData.lead_source_other,
+      ca_employment_status: qa.employment, ca_income_band: qa.income,
+      ca_concierge_score_tier: CA_STATE.quizTier,
+      ca_consent_credit_enquiry: !!appData.consent_credit_enquiry,
+      ca_consent_popia: !!appData.consent_popia,
+      ca_consent_credit_check: !!appData.consent_credit_check,
+      ca_consent_terms: !!appData.consent_terms
+    };
+  }
+
+  function submitApplication(){
+    appForm.style.display='none';
+    document.getElementById('app-progress-wrap').style.display='none';
+
+    sendWebhookEntry('application_completed', {completed_payload: buildSubmissionPayload()});
+
+    if (GHL_WEBHOOK_URL && GHL_WEBHOOK_URL.indexOf('https://')===0){
+      fetch(GHL_WEBHOOK_URL, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(buildSubmissionPayload())
+      }).catch(function(){ /* local confirmation still shows even if the network call fails */ });
+    }
+
+    // Application is complete — this device no longer needs to hold the applicant's
+    // personal details, so clear them rather than leaving PII sitting in localStorage.
+    CA_STATE = {};
+    try{ localStorage.removeItem(STATE_KEY); }catch(e){}
+
+    appConfirm.style.display='block';
+    appConfirm.innerHTML =
+      '<div class="confirm-panel">' +
+        '<div class="confirm-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>' +
+        "<h3>You're Done. Here's What Happens Next.</h3>" +
+        '<p>A consultant will review your details and be in touch within one working day.</p>' +
+        "<p>They'll also share a secure way to send through your ID, payslips and any other documents — no need to upload anything here.</p>" +
+      '</div>';
+  }
+
+  renderAppStep();
+
+  window.CAApp = {
+    prefillFromQuiz:function(){
+      var qa = CA_STATE.quizAnswers || {};
+      if (qa.intent) appData.intent = qa.intent;
+      if (qa.amount) appData.loan_amount = qa.amount;
+      if (qa.security==='vehicle') appData.asset_type = 'Motor vehicle';
+      else if (qa.security==='property') appData.asset_type = 'Property';
+      else if (qa.security==='both') appData.asset_type = 'Motor vehicle';
+      persistAppData();
+      appStep = 2;
+      renderAppStep();
+    }
+  };
+
+})();
+</script>
+</body>
+</html>
