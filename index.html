@@ -1292,6 +1292,15 @@
   }
 
   function submitApplication(){
+    // Never accept a submission without contact details — historically the quiz
+    // prefill jumped past step 0, so applications arrived with no name/email/phone.
+    if (!appData.first_name || !appData.last_name || !appData.email || !appData.phone){
+      appStep = 0;
+      persistAppData();
+      renderAppStep();
+      window.scrollTo({top: appForm.getBoundingClientRect().top + window.pageYOffset - 100, behavior:'smooth'});
+      return;
+    }
     appForm.style.display='none';
     document.getElementById('app-progress-wrap').style.display='none';
 
@@ -1331,7 +1340,7 @@
       else if (qa.security==='property') appData.asset_type = 'Property';
       else if (qa.security==='both') appData.asset_type = 'Motor vehicle';
       persistAppData();
-      appStep = 2;
+      appStep = 0;
       renderAppStep();
     }
   };
