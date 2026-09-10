@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CapitalAssist — Need Funding? Let's Make A Plan.</title>
+<title>CapitalAssist | Vehicle Refinancing: Need Cash From Your Car?</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <meta name="description" content="One secure application. A network of registered funding partners. CapitalAssist helps qualifying South Africans explore vehicle refinance, debt consolidation, balloon payment and property-backed funding solutions — no upfront fees.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -114,6 +117,21 @@
     .nav__logo{height:36px;}
     .nav .btn--sm{padding:9px 15px;font-size:0.8125rem;}
     .nav .container{gap:10px;}
+    /* The long final CTA label runs past a 320px screen at full button padding,
+       so let it wrap and tighten the side padding on small phones. */
+    .final .btn--lg{max-width:100%;white-space:normal;padding-left:22px;padding-right:22px;}
+    /* Compact hero on phones so the quick-check widget sits closer to the fold:
+       2x2 trust chips instead of a 4-row stack, and tighter hero spacing. */
+    .hero{padding-top:var(--space-4);}
+    /* Flatten the hero columns on phones so the chips can slot in after the
+       quick-check card: copy first, widget second, reassurance last. */
+    .hero .hero__grid{gap:2px;}
+    .hero__grid > div{display:contents;}
+    .hero__grid > div > *{min-width:0;}
+    .hero .trust-bar{order:2;margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .hero-check{order:1;}
+    .hero .trust-chip{font-size:0.76rem;padding:8px 10px;justify-content:flex-start;}
+    .hero__sub{font-size:1.05rem;margin-bottom:var(--space-3);}
   }
 
   /* Mobile sticky CTA bar */
@@ -135,7 +153,7 @@
     color:var(--color-accent);background:var(--color-accent-tint);padding:7px 14px;border-radius:var(--radius-pill);margin-bottom:var(--space-3);
   }
   .hero__grid{display:grid;grid-template-columns:1fr;gap:var(--space-6);align-items:center;}
-  @media (min-width:960px){ .hero__grid{grid-template-columns:0.92fr 1.08fr;gap:var(--space-5);} }
+  @media (min-width:960px){ .hero__grid{grid-template-columns:1.05fr 0.95fr;gap:var(--space-5);} }
   .hero h1{font-size:var(--fs-h1);line-height:var(--lh-tight);letter-spacing:-0.02em;color:var(--color-primary);font-weight:800;margin-bottom:var(--space-3);}
   .hero__sub{font-size:1.125rem;color:#4b5a66;max-width:46ch;margin-bottom:var(--space-4);}
   .hero__ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:var(--space-5);}
@@ -177,6 +195,44 @@
     background:rgba(15,47,69,0.72);color:#fff;font-size:0.75rem;font-weight:700;
     padding:6px 12px;border-radius:var(--radius-pill);letter-spacing:0.02em;
   }
+
+  /* Inline video placement (How It Works) */
+  .video-wrap--inline{aspect-ratio:16/10.2;max-width:560px;margin:0 auto var(--space-4);}
+  @media (min-width:960px){ .video-wrap--inline{aspect-ratio:16/10.2;max-width:560px;margin:0 auto var(--space-4);} }
+  .video-intro{text-align:center;color:#4b5a66;font-size:1rem;margin-bottom:var(--space-3);}
+
+  /* ---------- Hero qualification note ---------- */
+  .hero-qual{
+    display:flex;align-items:flex-start;gap:10px;max-width:46ch;
+    background:var(--color-accent-tint);border-radius:var(--radius-sm);
+    padding:12px 16px;margin-bottom:var(--space-3);
+    font-size:0.92rem;font-weight:600;color:var(--color-primary);line-height:1.45;
+  }
+  .hero-qual svg{flex:0 0 auto;margin-top:4px;color:var(--color-accent);}
+
+  /* ---------- Hero quick-check card ---------- */
+  .hero-check{
+    background:var(--color-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+    padding:var(--space-3);max-width:560px;margin:0 auto;
+  }
+  @media (min-width:560px){ .hero-check{padding:var(--space-4);} }
+  .hero-check__head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:var(--space-3);}
+  .hero-check__title{
+    font-size:0.8125rem;font-weight:700;color:var(--color-accent);
+    letter-spacing:0.04em;text-transform:uppercase;line-height:1.4;
+  }
+  .hero-check__count{font-size:0.8125rem;font-weight:700;color:#8a97a3;white-space:nowrap;}
+  .hero-check__foot{margin-top:var(--space-3);text-align:center;font-size:0.8rem;font-weight:600;color:#8a97a3;}
+  .hero-check .quiz-question{font-size:1.15rem;margin-bottom:var(--space-2);}
+  .hero-check .quiz-options{margin-bottom:0;}
+  .hero-check .quiz-result-body{margin-bottom:var(--space-3);}
+  .hero-check .quiz-lite-capture{margin-top:var(--space-2);}
+  .hero-check .stars{font-size:1.7rem;text-align:center;}
+  .hero-check-back{
+    background:none;border:none;padding:0;margin-top:var(--space-2);
+    color:#5b6b7f;font-size:0.85rem;font-weight:600;cursor:pointer;text-decoration:underline;
+  }
+  .mobile-cta.is-hidden{display:none !important;}
 
   /* ---------- Generic sections ---------- */
   .section{padding:var(--space-7) 0;}
@@ -405,13 +461,13 @@
       <img class="nav__logo" src="assets/logo-mark.png" alt="CapitalAssist">
     </a>
     <div class="nav__actions">
-      <button class="btn btn--primary btn--sm js-cta-primary" type="button">Check If I Qualify</button>
+      <button class="btn btn--primary btn--sm js-cta-primary" type="button">See My Options</button>
     </div>
   </div>
 </header>
 
 <div class="mobile-cta">
-  <button class="btn btn--primary btn--block js-cta-primary" type="button">Check If I Qualify</button>
+  <button class="btn btn--primary btn--block js-cta-primary" type="button">See My Options</button>
 </div>
 
 <main>
@@ -420,12 +476,13 @@
   <section id="hero" class="hero">
     <div class="container hero__grid">
       <div>
-        <span class="hero__eyebrow">Your Funding Concierge</span>
-        <h1>Need Funding?<br>Let's Make A Plan.</h1>
-        <p class="hero__sub">Answer a few quick questions and we'll help you explore the most suitable funding solution for your situation.</p>
-        <div class="hero__ctas">
-          <button class="btn btn--primary btn--lg js-cta-primary" type="button">Check If I Qualify</button>
-        </div>
+        <span class="hero__eyebrow">Vehicle Refinancing · South African Specialists</span>
+        <h1>Need Cash From Your Car?</h1>
+        <p class="hero-qual">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>For vehicles 2008 or newer, at least 12 months into finance, or already paid off.</span>
+        </p>
+        <p class="hero__sub">Answer three quick questions to see whether your vehicle qualifies, then get your Funding Concierge Score™. Free · No Obligation · No Credit Check.</p>
         <div class="trust-bar">
           <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>One Application</span>
           <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Multiple Funding Partners</span>
@@ -434,15 +491,13 @@
         </div>
       </div>
       <div>
-        <div class="video-wrap" id="vsl-wrap">
-          <span class="video-duration-badge">~1 Minute</span>
-          <button class="video-poster js-play-vsl" type="button" aria-label="Play: watch this before applying">
-            <img src="assets/video/vsl-poster.jpg" alt="CapitalAssist — watch this before applying">
-            <span class="play-btn">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="#0F2F45"><path d="M8 5v14l11-7z"></path></svg>
-            </span>
-            <span class="video-caption">Watch this before applying · ~1 Minute</span>
-          </button>
+        <div class="hero-check" id="hero-check">
+          <div class="hero-check__head">
+            <span class="hero-check__title">Quick Check: Step 1 of your Funding Concierge Score™</span>
+            <span class="hero-check__count" id="hero-check-count">1 of 3</span>
+          </div>
+          <div id="hero-check-body"></div>
+          <p class="hero-check__foot">Free · No Obligation · No Credit Check</p>
         </div>
       </div>
     </div>
@@ -494,7 +549,7 @@
           <div class="compare-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Personal guidance</div>
         </div>
       </div>
-      <div class="section-cta"><button class="btn btn--dark btn--lg js-cta-primary" type="button">Check If I Qualify</button></div>
+      <div class="section-cta"><button class="btn btn--dark btn--lg js-cta-primary" type="button">See My Options</button></div>
     </div>
   </section>
 
@@ -504,7 +559,7 @@
       <div class="section__head" data-reveal>
         <span class="eyebrow">Let's Start With Your Situation</span>
         <h2>What Do You Need?</h2>
-        <p>Choose whichever is closest — it takes you straight into your Funding Concierge Score.</p>
+        <p>Choose whichever is closest. It drops you into your assessment at the right question.</p>
       </div>
       <div class="need-grid">
         <button class="need-card js-need-card" type="button" data-intent="vehicle_refinance" data-reveal>
@@ -554,13 +609,24 @@
         <span class="eyebrow">The Process</span>
         <h2>How It Works</h2>
       </div>
+      <p class="video-intro" data-reveal>Prefer to watch? Here's how it works in about a minute.</p>
+      <div class="video-wrap video-wrap--inline" id="vsl-wrap" data-reveal>
+        <span class="video-duration-badge">~1 Minute</span>
+        <button class="video-poster js-play-vsl" type="button" aria-label="Play: watch this before applying">
+          <img src="assets/video/vsl-poster.jpg" alt="CapitalAssist, watch this before applying">
+          <span class="play-btn">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="#0F2F45"><path d="M8 5v14l11-7z"></path></svg>
+          </span>
+          <span class="video-caption">Watch this before applying · ~1 Minute</span>
+        </button>
+      </div>
       <div class="timeline">
         <div class="timeline__step" data-reveal><div class="timeline__num">1</div><h3>One Application</h3><p>Tell us your situation once. That's the only form you'll fill in.</p></div>
         <div class="timeline__step" data-reveal><div class="timeline__num">2</div><h3>Assessment</h3><p>We review your answers and match you with partners who genuinely fit your profile.</p></div>
         <div class="timeline__step" data-reveal><div class="timeline__num">3</div><h3>Funding Partner Review</h3><p>Our network assesses your application under their own credit and affordability criteria.</p></div>
         <div class="timeline__step" data-reveal><div class="timeline__num">4</div><h3>Outcome</h3><p>You hear back with a clear next step — an offer, or honest guidance on what to do instead.</p></div>
       </div>
-      <div class="section-cta"><button class="btn btn--primary btn--lg js-cta-primary" type="button">Check If I Qualify</button></div>
+      <div class="section-cta"><button class="btn btn--primary btn--lg js-cta-primary" type="button">See My Options</button></div>
     </div>
   </section>
 
@@ -600,7 +666,7 @@
         <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><h3>Dedicated Consultant</h3><p>A real person guides you through the process and explains your options in plain language.</p></div>
         <div class="why-card" data-reveal><span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span><h3>Transparent Process</h3><p>No hidden surprises. We tell you exactly where you stand, honestly, at every step.</p></div>
       </div>
-      <div class="section-cta"><button class="btn btn--dark btn--lg js-cta-primary" type="button">Check If I Qualify</button></div>
+      <div class="section-cta"><button class="btn btn--dark btn--lg js-cta-primary" type="button">See My Options</button></div>
     </div>
   </section>
 
@@ -655,7 +721,7 @@
     <div class="final-bg" style="background-image:url('assets/images/final-cta-visual.png')"></div>
     <div class="container">
       <p class="final__statement">If there's a way forward…<br>we'll help you find it.</p>
-      <button class="btn btn--primary btn--lg js-cta-primary" type="button">Continue My Plan</button>
+      <button class="btn btn--primary btn--lg js-cta-primary" type="button">See My Refinancing Options</button>
     </div>
   </section>
 
@@ -776,10 +842,11 @@
   /* ---------------- Need cards → pre-select intent, jump to quiz ---------------- */
   document.querySelectorAll('.js-need-card').forEach(function(card){
     card.addEventListener('click', function(){
-      CA_STATE.intent = card.getAttribute('data-intent');
+      var intent = card.getAttribute('data-intent');
+      CA_STATE.intent = intent;
       saveState();
       smoothScrollTo('concierge-score');
-      if (window.CAQuiz) window.CAQuiz.jumpToIntentConfirm();
+      if (window.CAQuiz) window.CAQuiz.seedIntent(intent);
     });
   });
 
@@ -822,20 +889,40 @@
   ================================================================= */
   var QUIZ_QUESTIONS = [
     {
-      id:'intent', type:'radio', prompt:'What do you need funding for?',
+      id:'intent', type:'radio', prompt:"What's the situation?",
       options:[
-        {v:'vehicle_refinance', l:'I need lower monthly payments'},
         {v:'cash_against_vehicle', l:'I need cash'},
         {v:'balloon_payment', l:'My balloon payment is due'},
-        {v:'debt_consolidation', l:'I need to consolidate debt'},
-        {v:'commercial_vehicle', l:'I need business finance'},
-        {v:'property_backed', l:'I want property-backed funding'}
+        {v:'vehicle_refinance', l:'My monthly payment is too high'},
+        {v:'debt_consolidation', l:"I'm paying too much interest on other debt"},
+        {v:'cash_against_vehicle', l:'I want to unlock the value in my vehicle'},
+        {v:'unsure', l:"I'm not sure, I just want to see my options"}
       ]
+    },
+    {
+      // Vehicle gates apply to vehicle-secured paths only; property_backed skips them.
+      id:'vehicle_year', type:'radio', prompt:'What year model is your vehicle?',
+      options:[
+        {v:'2008_or_newer', l:'2008 or newer'},
+        {v:'pre_2008', l:'Older than 2008'}
+      ],
+      gateValues:['pre_2008'],
+      skip:function(a){ return a.intent==='property_backed'; }
+    },
+    {
+      id:'finance_status', type:'radio', prompt:'Where are you with your vehicle finance?',
+      options:[
+        {v:'over_12_months', l:'More than 12 months into my finance term'},
+        {v:'paid_off', l:'My vehicle is fully paid off'},
+        {v:'under_12_months', l:'Less than 12 months into my finance term'}
+      ],
+      gateValues:['under_12_months'],
+      skip:function(a){ return a.intent==='property_backed'; }
     },
     {
       id:'eligible_base', type:'radio', prompt:"Are you 18 or older, with a credit record that's clear of blacklisting, debt review or insolvency?",
       options:[{v:'yes',l:'Yes, that\'s me'},{v:'no',l:'No / not sure'}],
-      hardGate:true
+      gateValues:['no']
     },
     {
       id:'employment', type:'radio', prompt:"What's your employment situation?",
@@ -870,7 +957,20 @@
     }
   ];
 
-  var WARNING_ICON_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+  // Shared vehicle-gate copy, used by both the hero quick check and the full quiz
+  // so a visitor never sees two different explanations for the same failed gate.
+  var GATE_COPY = {
+    pre_2008:{
+      reason:"Honest answer: this offer isn't available for your vehicle. Our funding partners currently work with vehicles from 2008 onward, and yours falls outside that.",
+      followUp:"Leave your details and we'll let you know if that changes."
+    },
+    under_12_months:{
+      reason:"Honest answer: not yet. Our funding partners need you to be more than 12 months into your vehicle finance term before refinancing becomes an option.",
+      followUp:"You're closer than you think. Leave your details and we'll reach out when the timing works."
+    }
+  };
+
+  var WARNING_ICON_SVG ='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
 
   var quizStep = 0;
   var quizAnswers = CA_STATE.quizAnswers || {};
@@ -880,23 +980,51 @@
   var quizProgressFill = document.getElementById('quiz-progress-fill');
   var quizProgressWrap = document.getElementById('quiz-progress-wrap');
 
+  // Questions that apply to the current answers. Property-backed applicants never
+  // see the two vehicle questions, so the count shown is 6 instead of 8.
+  function visibleQuestions(){
+    return QUIZ_QUESTIONS.filter(function(q){
+      return !(typeof q.skip === 'function' && q.skip(quizAnswers));
+    });
+  }
+
+  // Two intent options intentionally share the value cash_against_vehicle, so only
+  // the first option carrying the stored value is drawn as the selected one.
+  function isSelectedOption(q, opt, optIdx){
+    if (quizAnswers[q.id] !== opt.v) return false;
+    for (var i=0;i<optIdx;i++){
+      if (q.options[i].v === opt.v) return false;
+    }
+    return true;
+  }
+
+  function firstUnansweredStep(){
+    var qs = visibleQuestions();
+    for (var i=0;i<qs.length;i++){
+      var a = quizAnswers[qs[i].id];
+      if (a === undefined || a === null || a === '') return i;
+    }
+    return qs.length;
+  }
+
   function renderQuiz(){
     if (quizPendingAdvance){ clearTimeout(quizPendingAdvance); quizPendingAdvance = null; }
-    if (quizStep >= QUIZ_QUESTIONS.length){
+    var visible = visibleQuestions();
+    if (quizStep >= visible.length){
       renderQuizResult();
       return;
     }
-    var q = QUIZ_QUESTIONS[quizStep];
-    quizStepLabel.textContent = 'Question ' + (quizStep+1) + ' of ' + QUIZ_QUESTIONS.length;
-    quizProgressFill.style.width = Math.round(((quizStep)/QUIZ_QUESTIONS.length)*100) + '%';
+    var q = visible[quizStep];
+    quizStepLabel.textContent = 'Question ' + (quizStep+1) + ' of ' + visible.length;
+    quizProgressFill.style.width = Math.round(((quizStep)/visible.length)*100) + '%';
     quizProgressWrap.style.display='';
 
     var html = '<div class="quiz-question">' + escapeHtml(q.prompt) + '</div>';
     if (q.type==='radio'){
       html += '<div class="quiz-options" role="radiogroup">';
-      q.options.forEach(function(opt){
-        var selected = quizAnswers[q.id]===opt.v ? ' selected' : '';
-        html += '<button type="button" class="option-btn' + selected + '" data-value="' + opt.v + '"><span>' + escapeHtml(opt.l) + '</span><span class="check">' + (quizAnswers[q.id]===opt.v ? '&#10003;' : '') + '</span></button>';
+      q.options.forEach(function(opt, optIdx){
+        var isSelected = isSelectedOption(q, opt, optIdx);
+        html += '<button type="button" class="option-btn' + (isSelected ? ' selected' : '') + '" data-value="' + opt.v + '"><span>' + escapeHtml(opt.l) + '</span><span class="check">' + (isSelected ? '&#10003;' : '') + '</span></button>';
       });
       html += '</div>';
     } else if (q.type==='number'){
@@ -905,7 +1033,7 @@
     }
     html += '<div class="quiz-nav">';
     html += quizStep>0 ? '<button type="button" class="btn btn--ghost" id="quiz-back">Back</button>' : '<span></span>';
-    html += '<button type="button" class="btn btn--primary" id="quiz-next">' + (quizStep===QUIZ_QUESTIONS.length-1 ? 'See My Score' : 'Next') + '</button>';
+    html += '<button type="button" class="btn btn--primary" id="quiz-next">' + (quizStep===visible.length-1 ? 'See My Score' : 'Next') + '</button>';
     html += '</div>';
 
     quizBody.innerHTML = html;
@@ -916,7 +1044,7 @@
           var value = btn.getAttribute('data-value');
           quizAnswers[q.id] = value;
           saveQuizProgress();
-          var isDisqualifyingAnswer = (q.hardGate && value === 'no');
+          var isDisqualifyingAnswer = !!(q.gateValues && q.gateValues.indexOf(value) !== -1);
           if (isDisqualifyingAnswer){
             quizBody.querySelectorAll('.option-btn, .quiz-nav button').forEach(function(b){ b.disabled = true; });
             btn.classList.add('flagged');
@@ -925,7 +1053,9 @@
             flagMsg.className = 'quiz-flag-note';
             flagMsg.innerHTML = WARNING_ICON_SVG + '<span>This is the answer that determines your result — checking it now…</span>';
             quizBody.querySelector('.quiz-nav').insertAdjacentElement('beforebegin', flagMsg);
-            quizPendingAdvance = setTimeout(function(){ quizPendingAdvance=null; quizStep++; renderQuiz(); }, 900);
+            // A failed gate settles the outcome, so go straight to the result rather
+            // than asking questions whose answers can no longer change anything.
+            quizPendingAdvance = setTimeout(function(){ quizPendingAdvance=null; quizStep = visibleQuestions().length; renderQuiz(); }, 900);
           } else {
             quizStep++;
             renderQuiz();
@@ -980,6 +1110,14 @@
     quizProgressWrap.style.display='none';
 
     // Hard gates — factual eligibility only, never a scored/subjective decline.
+    if (quizAnswers.vehicle_year === 'pre_2008'){
+      renderNotEligible(GATE_COPY.pre_2008.reason, GATE_COPY.pre_2008.followUp);
+      return;
+    }
+    if (quizAnswers.finance_status === 'under_12_months'){
+      renderNotEligible(GATE_COPY.under_12_months.reason, GATE_COPY.under_12_months.followUp);
+      return;
+    }
     if (quizAnswers.eligible_base === 'no'){
       renderNotEligible("Our funding partners need applicants to be 18 or older, with a credit record that's clear of blacklisting, debt review or insolvency. Based on your answer, that's not the case for you right now.", "That doesn't mean never — it means not through this route, today. Leave your details below and we'll reach out the moment your circumstances change.");
       return;
@@ -1035,6 +1173,42 @@
     });
   }
 
+  // Renders a built markup string into a container. Every dynamic value that reaches
+  // these strings is passed through escapeHtml first, so the parsed fragment only ever
+  // contains markup this file authored.
+  function setHtml(el, html){
+    el.replaceChildren(document.createRange().createContextualFragment(html));
+  }
+
+  // Keep-Me-Posted mini form, shared by the quiz fail state and the hero quick check.
+  // Fields are class-based and looked up inside their own container, so the quiz card
+  // and the hero card can both hold one without clashing ids.
+  function liteCaptureHtml(){
+    return '<div class="quiz-lite-capture">' +
+      '<div class="field"><label>Full name</label><input type="text" class="lite-name" placeholder="Your name"></div>' +
+      '<div class="field"><label>Email</label><input type="email" class="lite-email" placeholder="you@example.com"></div>' +
+      '<div class="field"><label>Phone</label><input type="tel" class="lite-phone" placeholder="082 000 0000"></div>' +
+      '<button type="button" class="btn btn--dark btn--block lite-submit">Keep Me Posted</button>' +
+    '</div>';
+  }
+
+  function bindLiteCapture(container, reason){
+    var submitBtn = container.querySelector('.lite-submit');
+    if (!submitBtn) return;
+    submitBtn.addEventListener('click', function(){
+      var liteEntry = {
+        name: container.querySelector('.lite-name').value,
+        email: container.querySelector('.lite-email').value,
+        phone: container.querySelector('.lite-phone').value,
+        not_eligible_reason: reason
+      };
+      CA_STATE.liteCapture = liteEntry;
+      saveState();
+      sendWebhookEntry('not_eligible_lead_captured', liteEntry);
+      setHtml(container, '<div class="quiz-result"><div class="quiz-result-title">Thanks, noted.</div><div class="quiz-result-body"><p>We\'ll be in touch the moment things change. In the meantime, feel free to browse how CapitalAssist works above.</p></div></div>');
+    });
+  }
+
   function renderNotEligible(reason, followUp){
     CA_STATE.quizCompleted = false;
     CA_STATE.quizTier = 'not_eligible';
@@ -1047,25 +1221,9 @@
         '<div class="quiz-result-title">Not Eligible Yet</div>' +
         '<div class="quiz-reason-callout">' + WARNING_ICON_SVG + '<p>' + escapeHtml(reason) + '</p></div>' +
         '<div class="quiz-result-body"><p>' + escapeHtml(followUp) + '</p></div>' +
-        '<div class="quiz-lite-capture">' +
-          '<div class="field"><label for="lite-name">Full name</label><input type="text" id="lite-name" placeholder="Your name"></div>' +
-          '<div class="field"><label for="lite-email">Email</label><input type="email" id="lite-email" placeholder="you@example.com"></div>' +
-          '<div class="field"><label for="lite-phone">Phone</label><input type="tel" id="lite-phone" placeholder="082 000 0000"></div>' +
-          '<button type="button" class="btn btn--dark btn--block" id="lite-submit">Keep Me Posted</button>' +
-        '</div>' +
+        liteCaptureHtml() +
       '</div>';
-    document.getElementById('lite-submit').addEventListener('click', function(){
-      var liteEntry = {
-        name: document.getElementById('lite-name').value,
-        email: document.getElementById('lite-email').value,
-        phone: document.getElementById('lite-phone').value,
-        not_eligible_reason: reason
-      };
-      CA_STATE.liteCapture = liteEntry;
-      saveState();
-      sendWebhookEntry('not_eligible_lead_captured', liteEntry);
-      quizBody.innerHTML = '<div class="quiz-result"><div class="quiz-result-title">Thanks — noted.</div><div class="quiz-result-body"><p>We\'ll be in touch the moment things change. In the meantime, feel free to browse how CapitalAssist works above.</p></div></div>';
-    });
+    bindLiteCapture(quizBody, reason);
   }
 
   function starRow(litCount){
@@ -1076,14 +1234,210 @@
     return out;
   }
 
+  quizStep = firstUnansweredStep();
   renderQuiz();
 
   window.CAQuiz = {
-    jumpToIntentConfirm:function(){
-      quizStep = 0;
+    // Stores the intent chosen outside the quiz (need card), then opens the quiz at
+    // the first question that still needs an answer.
+    seedIntent:function(code){
+      if (code){
+        quizAnswers.intent = code;
+        saveQuizProgress();
+      }
+      quizStep = firstUnansweredStep();
+      renderQuiz();
+      renderHeroCheck();
+    },
+    resumeAfterHero:function(){
+      quizStep = firstUnansweredStep();
       renderQuiz();
     }
   };
+
+  /* ================================================================
+     HERO QUICK CHECK: the first three quiz questions, above the fold.
+     No question data of its own: it reads and writes the same quizAnswers
+     state, so the gates cannot be bypassed by scrolling past the hero.
+  ================================================================= */
+  var heroCheckCard = document.getElementById('hero-check');
+  var heroCheckBody = document.getElementById('hero-check-body');
+  var heroCheckCount = document.getElementById('hero-check-count');
+  var HERO_QUESTION_IDS = ['intent','vehicle_year','finance_status'];
+  var heroPendingAdvance = null;
+
+  function heroQuestions(){
+    return visibleQuestions().filter(function(q){
+      return HERO_QUESTION_IDS.indexOf(q.id) !== -1;
+    });
+  }
+
+  function heroFailCopy(){
+    if (quizAnswers.vehicle_year === 'pre_2008') return GATE_COPY.pre_2008;
+    if (quizAnswers.finance_status === 'under_12_months') return GATE_COPY.under_12_months;
+    return null;
+  }
+
+  function renderHeroCheck(){
+    if (!heroCheckCard || !heroCheckBody || !heroCheckCount) return;
+    if (heroPendingAdvance){ clearTimeout(heroPendingAdvance); heroPendingAdvance = null; }
+
+    if (CA_STATE.quizCompleted){ heroWelcomeBackState(); return; }
+
+    var fail = heroFailCopy();
+    if (fail){
+      if (CA_STATE.liteCapture) heroThanksState();
+      else heroFailState(fail);
+      return;
+    }
+
+    // Property-backed applicants have no vehicle questions to answer, so the hero
+    // card just points them at the rest of the assessment.
+    if (quizAnswers.intent === 'property_backed'){ heroResumeState(); return; }
+
+    var qs = heroQuestions();
+    if (!qs.length){ heroResumeState(); return; }
+    var idx = -1;
+    for (var i=0;i<qs.length;i++){
+      if (!quizAnswers[qs[i].id]){ idx = i; break; }
+    }
+    if (idx === -1){ heroPassState(qs.length); return; }
+    heroQuestionState(qs, idx);
+  }
+
+  function heroQuestionState(qs, idx){
+    var q = qs[idx];
+    heroCheckCount.textContent = (idx+1) + ' of ' + qs.length;
+
+    var html = '<div class="quiz-question">' + escapeHtml(q.prompt) + '</div>';
+    html += '<div class="quiz-options" role="radiogroup">';
+    q.options.forEach(function(opt, optIdx){
+      var isSelected = isSelectedOption(q, opt, optIdx);
+      html += '<button type="button" class="option-btn' + (isSelected ? ' selected' : '') + '" data-value="' + opt.v + '">' +
+              '<span>' + escapeHtml(opt.l) + '</span>' +
+              '<span class="check">' + (isSelected ? '&#10003;' : '') + '</span></button>';
+    });
+    html += '</div>';
+    if (idx > 0) html += '<button type="button" class="hero-check-back">Back</button>';
+    setHtml(heroCheckBody, html);
+
+    heroCheckBody.querySelectorAll('.option-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var value = btn.getAttribute('data-value');
+        quizAnswers[q.id] = value;
+        saveQuizProgress();
+        var isGateAnswer = !!(q.gateValues && q.gateValues.indexOf(value) !== -1);
+        if (isGateAnswer){
+          heroCheckBody.querySelectorAll('.option-btn, .hero-check-back').forEach(function(b){ b.disabled = true; });
+          btn.classList.add('flagged');
+          btn.querySelector('.check').innerHTML = '&#10003;';
+          var flagMsg = document.createElement('div');
+          flagMsg.className = 'quiz-flag-note';
+          var flagIcon = document.createRange().createContextualFragment(WARNING_ICON_SVG);
+          var flagText = document.createElement('span');
+          flagText.textContent = 'This is the answer that determines your result. Checking it now.';
+          flagMsg.appendChild(flagIcon);
+          flagMsg.appendChild(flagText);
+          heroCheckBody.appendChild(flagMsg);
+          heroPendingAdvance = setTimeout(function(){ heroPendingAdvance = null; renderHeroCheck(); }, 900);
+          return;
+        }
+        renderHeroCheck();
+      });
+    });
+
+    var backBtn = heroCheckBody.querySelector('.hero-check-back');
+    if (backBtn){
+      backBtn.addEventListener('click', function(){
+        delete quizAnswers[qs[idx-1].id];
+        saveQuizProgress();
+        renderHeroCheck();
+      });
+    }
+  }
+
+  function heroPassState(total){
+    heroCheckCount.textContent = total ? (total + ' of ' + total) : 'Done';
+    setHtml(heroCheckBody,
+      '<div class="quiz-result-title">Good news: your vehicle fits.</div>' +
+      '<div class="quiz-result-body"><p>Your vehicle matches what our funding partners work with. Let\'s finish your Funding Concierge Score™. It takes about 45 seconds and tells you exactly where you stand.</p></div>' +
+      '<button type="button" class="btn btn--primary btn--block hero-check-continue">See My Refinancing Options</button>');
+    heroCheckBody.querySelector('.hero-check-continue').addEventListener('click', function(){
+      smoothScrollTo('concierge-score');
+      if (window.CAQuiz) window.CAQuiz.resumeAfterHero();
+    });
+  }
+
+  function heroResumeState(){
+    heroCheckCount.textContent = 'Next';
+    setHtml(heroCheckBody,
+      '<div class="quiz-result-title">Let\'s finish your Funding Concierge Score™.</div>' +
+      '<div class="quiz-result-body"><p>It takes about 45 seconds and tells you exactly where you stand.</p></div>' +
+      '<button type="button" class="btn btn--primary btn--block hero-check-continue">See My Options</button>');
+    heroCheckBody.querySelector('.hero-check-continue').addEventListener('click', function(){
+      smoothScrollTo('concierge-score');
+      if (window.CAQuiz) window.CAQuiz.resumeAfterHero();
+    });
+  }
+
+  function heroFailState(fail){
+    heroCheckCount.textContent = 'Result';
+    CA_STATE.quizCompleted = false;
+    CA_STATE.quizTier = 'not_eligible';
+    saveState();
+    setHtml(heroCheckBody,
+      '<div class="stars">' + starRow(1) + '</div>' +
+      '<div class="quiz-result-title">Not Eligible Yet</div>' +
+      '<div class="quiz-reason-callout">' + WARNING_ICON_SVG + '<p>' + escapeHtml(fail.reason) + '</p></div>' +
+      '<div class="quiz-result-body"><p>' + escapeHtml(fail.followUp) + '</p></div>' +
+      liteCaptureHtml());
+    bindLiteCapture(heroCheckBody, fail.reason);
+  }
+
+  function heroThanksState(){
+    heroCheckCount.textContent = 'Done';
+    setHtml(heroCheckBody,
+      '<div class="quiz-result-title">Thanks, noted.</div>' +
+      '<div class="quiz-result-body"><p>We have your details and we\'ll be in touch the moment things change.</p></div>' +
+      '<button type="button" class="hero-check-back hero-check-restart">Start over</button>');
+    heroCheckBody.querySelector('.hero-check-restart').addEventListener('click', function(){
+      delete quizAnswers.intent;
+      delete quizAnswers.vehicle_year;
+      delete quizAnswers.finance_status;
+      saveQuizProgress();
+      CA_STATE.quizTier = null;
+      saveState();
+      renderHeroCheck();
+      quizStep = firstUnansweredStep();
+      renderQuiz();
+    });
+  }
+
+  function heroWelcomeBackState(){
+    heroCheckCount.textContent = 'Done';
+    setHtml(heroCheckBody,
+      '<div class="quiz-result-title">Welcome back.</div>' +
+      '<div class="quiz-result-body"><p>You already have your Funding Concierge Score™. Pick up where you left off.</p></div>' +
+      '<button type="button" class="btn btn--primary btn--block hero-check-app">Continue My Plan</button>');
+    heroCheckBody.querySelector('.hero-check-app').addEventListener('click', function(){
+      smoothScrollTo('application');
+      if (window.CAApp) window.CAApp.prefillFromQuiz();
+    });
+  }
+
+  renderHeroCheck();
+
+  /* ---------------- Sticky mobile CTA stays out of the hero widget's way ---------------- */
+  var mobileCta = document.querySelector('.mobile-cta');
+  var heroSection = document.getElementById('hero');
+  if (mobileCta && heroSection && 'IntersectionObserver' in window){
+    var ctaIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        mobileCta.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    },{threshold:0});
+    ctaIo.observe(heroSection);
+  }
 
   /* ================================================================
      APPLICATION — multi-step form
@@ -1099,7 +1453,8 @@
     balloon_payment:'Settle my balloon payment',
     debt_consolidation:'Consolidate my debt',
     commercial_vehicle:'Business / commercial vehicle finance',
-    property_backed:'Property-backed funding'
+    property_backed:'Property-backed funding',
+    unsure:'Not sure yet, exploring options'
   };
   var APP_STEP_NAMES = ['Your Details','Location','Confirm Your Funding','How You Heard About Us','Consent'];
   var appStep = 0;
